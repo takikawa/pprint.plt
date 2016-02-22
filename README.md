@@ -5,11 +5,12 @@ This is a pretty printing library for Racket developed by Dave Herman.
 The original library is available on
 [PLaneT](http://planet.racket-lang.org/display.ss?package=pprint.plt&owner=dherman).
 
-The library is released under the LGPLv3.
+The library is released under the LGPLv3 license.
 
 ---
 
 Copyright (C) 2005 - 2008 David Herman
+
 Copyright (C) 2016 Asumu Takikawa
 
 Portions based on PPrint.hs - a pretty-printer for Haskell

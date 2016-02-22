@@ -5,7 +5,7 @@ This is a pretty printing library for Racket developed by Dave Herman.
 The original library is available on
 [PLaneT](http://planet.racket-lang.org/display.ss?package=pprint.plt&owner=dherman).
 
-The library is released under the LGPL.
+The library is released under the LGPLv3.
 
 ---
 
@@ -23,7 +23,7 @@ See COPYING for accompanying license.
 
 This library is free software; you can redistribute it and/or modify it
 under the terms of the GNU Lesser General Public License as published by
-the Free Software Foundation; either version 2.1 of the License, or (at
+the Free Software Foundation; either version 3 of the License, or (at
 your option) any later version.
 
 This library is distributed in the hope that it will be useful, but WITHOUT

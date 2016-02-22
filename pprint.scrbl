@@ -1,12 +1,15 @@
 #lang scribble/manual
 
-@begin[(require scribble/example)
+@begin[(require scribble/example
+                scriblib/autobib)
        (require (for-label racket/base pprint))]
 
 @(define the-eval
    (let ([the-eval (make-base-eval)])
      (the-eval '(require pprint))
      the-eval))
+
+@(define-cite ~cite citet generate-bibliography)
 
 @title[#:tag "top"]{@bold{PPrint}: A Universal Pretty-Printer}
 
@@ -345,15 +348,15 @@ useful for porting existing Haskell code, for example.)
 Functional pretty printers have a surprisingly long and illustrious tradition in
 the literature. The ancestry of this library goes something like this:
 @itemize[
-    @item{1995 - John Hughes publishes a paper [@elemref["Hug95"]{Hug95}]
+    @item{1995 - John Hughes publishes a paper @citet[Hug95]
                  on creating an algebra of "pretty documents" for the implementation
                  of a pretty-printing library.}
-    @item{1997 - Simon Peyton Jones implements this as a Haskell library [@elemref["Pey97"]{Pey97}].}
-    @item{1998 - Philip Wadler publishes a paper [@elemref["Wad98"]{Wad98}] improving
+    @item{1997 - Simon Peyton Jones implements this as a Haskell library @citet[Pey97].}
+    @item{1998 - Philip Wadler publishes a paper @citet[Wad98] improving
                  on Hughes' algebra and design.}
-    @item{2001 - Daan Leijen implements this as a Haskell library [@elemref["Lei01"]{Lei01}].}
+    @item{2001 - Daan Leijen implements this as a Haskell library @citet[Lei01].}
     @item{2001 - Ralph Becket ports Leijen's library to Mercury, a strict functional/logic
-                 language [@elemref["Bec02"]{Bec02}].}
+                 language @citet[Bec02].}
 ]{}
 
 This library is a translation of the Haskell PPrint library, but with
@@ -399,7 +402,7 @@ looks at the soft break and chooses not to break because @racket[(text " ")] has
 length 1 and therefore fits, and it subsequently overruns the length of
 the line.
 
-@subsection[#:tag "racket"]{racket Port}
+@subsection[#:tag "racket"]{Racket Port}
 
 I've chosen a design somewhere in between the two. The code mostly
 follows the Haskell version, but I've replaced the @tt{UNION} constructor
@@ -415,7 +418,7 @@ I've also added Becket's @tt{LABEL} constructor.
 
 @itemize[
     @item{2006/9/26 - Added @tt{MARKUP} constructor with @racket[markup] and @racket[pretty-markup] operations.}
-    @item{2006/9/27 - The previous implementation didn't correctly prune the search space. Philip Wadler [@elemref["Wad98"]{Wad98}]
+    @item{2006/9/27 - The previous implementation didn't correctly prune the search space. Philip Wadler @citet[Wad98]
                       demonstrated examples of nested occurrences of @tt{GROUP}:
 
                       @racketblock[(define (test-performance n)
@@ -449,31 +452,37 @@ I've also added Becket's @tt{LABEL} constructor.
                      flattened output. Also, backtracking should happen when we reach a @tt{TEXT}
                      node that's wider than the remainder of the column, whereas the code was
                      backtracking after overrunning the column.}
+    @item{2016/02/21 - Ported the library from PLaneT to the new package system.}
 ]
 
-@bibliography[#:tag "bib"
-   @bib-entry[#:key "Bec02"
-              #:title "pprint.m"
-              #:url "http://www.cs.mu.oz.au/research/mercury/information/doc-latest/mercury_library/pprint.html"
-              #:author "Ralph Becket"
-              #:date "2002"]{}
-   @bib-entry[#:key "Hug95"
-              #:title "The Design of a Pretty-Printing Library"
-              #:url "http://www.cs.chalmers.se/~rjmh/Papers/pretty.html"
-              #:author "John Hughes"
-              #:date "1995"]{}
-   @bib-entry[#:key "Lei01"
-              #:title "PPrint, a Prettier Printer"
-              #:url "http://research.microsoft.com/users/daan/pprint.html"
-              #:date "2001"
-              #:author "Daan Leijen"]{}
-   @bib-entry[#:key "Pey97"
-              #:title "A Pretty-Printer Library in Haskell"
-              #:date "1997"
-              #:url "http://research.microsoft.com/~simonpj/downloads/pretty-printer/pretty.html"
-              #:author "Simon Peyton Jones"]{}
-   @bib-entry[#:key "Wad98"
-              #:title "A Prettier Printer"
-              #:date "1998"
-              #:url "http://homepages.inf.ed.ac.uk/wadler/topics/language-design.html#prettier"
-              #:author "Philip Wadler"]]{}
+@(define Bec02
+   (make-bib #:title "pprint.m"
+             #:url "http://www.cs.mu.oz.au/research/mercury/information/doc-latest/mercury_library/pprint.html"
+             #:author "Ralph Becket"
+             #:date "2002"))
+
+@(define Hug95
+   (make-bib #:title "The Design of a Pretty-Printing Library"
+             #:url "http://www.cs.chalmers.se/~rjmh/Papers/pretty.html"
+             #:author "John Hughes"
+             #:date "1995"))
+
+@(define Lei01
+   (make-bib #:title "PPrint, a Prettier Printer"
+             #:url "http://research.microsoft.com/users/daan/pprint.html"
+             #:date "2001"
+             #:author "Daan Leijen"))
+
+@(define Pey97
+   (make-bib #:title "A Pretty-Printer Library in Haskell"
+             #:date "1997"
+             #:url "http://research.microsoft.com/~simonpj/downloads/pretty-printer/pretty.html"
+             #:author "Simon Peyton Jones"))
+
+@(define Wad98
+   (make-bib #:title "A Prettier Printer"
+             #:date "1998"
+             #:url "http://homepages.inf.ed.ac.uk/wadler/topics/language-design.html#prettier"
+             #:author "Philip Wadler"))
+
+@(generate-bibliography)

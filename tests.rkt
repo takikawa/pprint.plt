@@ -1,6 +1,6 @@
 #lang scheme/base
 
-(require (planet schematics/schemeunit:3)
+(require rackunit
          "main.rkt")
 
 (define-syntax pprint

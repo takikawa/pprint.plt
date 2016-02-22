@@ -12,3 +12,6 @@
           (li "Page width may now also be " (tt "#f") ", indicating unbounded page width.")
           (li "Made the contract of " (tt "current-page-width") " more precise."))))
 (define version "2")
+
+(define deps '("base" "dherman-struct"))
+(define build-deps '("rackunit-lib"))

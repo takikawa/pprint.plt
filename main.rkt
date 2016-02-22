@@ -30,7 +30,7 @@
 
 #lang racket
 
-(require (planet dherman/struct:2/datatype)
+(require dherman-struct/datatype
          racket/contract
          (except-in racket/list empty flatten))
 

@@ -1,7 +1,7 @@
 #lang scheme/base
 
 (require (planet schematics/schemeunit:3)
-         "../../main.ss")
+         "main.rkt")
 
 (define-syntax pprint
   (syntax-rules ()

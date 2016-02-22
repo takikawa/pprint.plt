@@ -19,8 +19,8 @@
 ;;
 ;; =============================================================================
 
-#lang scheme/base
-(require "main.ss")
+#lang racket/base
+(require "main.rkt")
 
 (provide empty char text nest group)
 

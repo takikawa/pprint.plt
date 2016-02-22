@@ -1,8 +1,8 @@
-#lang setup/infotab
+#lang info
 (define name "pprint")
 (define blurb
   (list "A universal pretty-printing library."))
-(define primary-file "main.ss")
+(define primary-file "main.rkt")
 (define scribblings '(("pprint.scrbl" ())))
 (define categories '(datastructures io))
 (define repositories '("4.x"))

@@ -3,11 +3,11 @@
 @begin[(require scribble/manual)
        (require scribble/eval)
        (require scribble/basic)
-       (require (for-label "main.ss"))]
+       (require (for-label "main.rkt"))]
 
 @(define the-eval
    (let ([the-eval (make-base-eval)])
-     (the-eval '(require "main.ss"))
+     (the-eval '(require "main.rkt"))
      the-eval))
 
 @title[#:tag "top"]{@bold{PPrint}: A Universal Pretty-Printer}

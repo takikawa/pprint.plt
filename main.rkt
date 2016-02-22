@@ -28,11 +28,11 @@
 ;;
 ;; =============================================================================
 
-#lang scheme
+#lang racket
 
 (require (planet dherman/struct:2/datatype)
-         scheme/contract
-         (except-in scheme/list empty flatten))
+         racket/contract
+         (except-in racket/list empty flatten))
 
   ;; ===========================================================================
   ;; Primitives

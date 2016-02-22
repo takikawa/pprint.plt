@@ -10,5 +10,5 @@
           (li "Made the contract of " (tt "current-page-width") " more precise."))))
 (define version "2")
 
-(define deps '("base" "dherman-struct"))
-(define build-deps '("rackunit-lib"))
+(define deps '("base" "dherman-struct" "rackunit-lib"))
+(define build-deps '("racket-doc" "scribble-lib"))

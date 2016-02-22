@@ -1,13 +1,11 @@
-#lang scribble/doc
+#lang scribble/manual
 
-@begin[(require scribble/manual)
-       (require scribble/eval)
-       (require scribble/basic)
-       (require (for-label "main.rkt"))]
+@begin[(require scribble/example)
+       (require (for-label racket/base pprint))]
 
 @(define the-eval
    (let ([the-eval (make-base-eval)])
-     (the-eval '(require "main.rkt"))
+     (the-eval '(require pprint))
      the-eval))
 
 @title[#:tag "top"]{@bold{PPrint}: A Universal Pretty-Printer}
@@ -16,16 +14,16 @@ by Dave Herman (@tt{dherman at ccs dot neu dot edu})
 
 PPrint is a library for @deftech{pretty-printing}: generating textual representations
 formatted to fit as well as possible on a fixed-width device such as a text editor or
-printer. While PLT Scheme provides an excellent pretty-printer for Scheme,
+printer. While Racket provides an excellent pretty-printer for Racket code,
 this package provides a more general library for pretty-printing any text.
 
 @table-of-contents[]
 
 @section[#:tag "started"]{Getting Started with PPrint}
 
-To use PPrint, first @scheme[require] it from PLaneT:
+To use PPrint, first @racket[require] it from the package catalog:
 
-@schemeblock[(require (planet dherman/pprint:4))]
+@schemeblock[(require pprint)]
 
 Here's a simple example of pretty-printing a fragment of code.
 
@@ -49,7 +47,7 @@ Things to notice about this example:
 ]
 
 @section[#:tag "doc"]{Abstract Documents}
-@declare-exporting[(planet dherman/pprint:4)]
+@declare-exporting[pprint]
 
 Formatting text in PPrint involves creating an "abstract document" or @deftech{doc},
 which encapsulates formatting information for the pretty printer. The library
@@ -63,7 +61,7 @@ as a parameterized type @italic{doc a} for arbitrary markup of type @italic{a}. 
 documentation for @scheme[markup] for details.
 
 @section[#:tag "library"]{Library Documentation}
-@declare-exporting[(planet dherman/pprint:4)]
+@declare-exporting[pprint]
 
 @subsection[#:tag "rendering"]{Rendering Documents}
 
@@ -121,14 +119,15 @@ information. The markup is assumed not to affect the width of the
 string. This allows you, for example, to produce X-expressions from
 pretty-printed source.}
 
-@defexamples[#:eval the-eval (define (empty-xexpr? x)
-                               (or (null? x) (equal? x "")))
-                             (define (combine x1 x2)
-                               (cond
-                                 [(empty-xexpr? x1) x2]
-                                 [(empty-xexpr? x2) x1]
-                                 [else (list x1 x2)]))
-                             (pretty-markup (markup (λ (x) `(em ,x)) (text "hi!")) combine)]
+@examples[#:eval the-eval
+  (eval:no-prompt (define (empty-xexpr? x)
+                    (or (null? x) (equal? x ""))))
+  (eval:no-prompt (define (combine x1 x2)
+                    (cond
+                      [(empty-xexpr? x1) x2]
+                      [(empty-xexpr? x2) x1]
+                      [else (list x1 x2)])))
+  (pretty-markup (markup (λ (x) `(em ,x)) (text "hi!")) combine)]
 
 @defproc[(group (d doc?)) doc?]{
 Creates a document like @scheme[d] but with all line breaks removed, if it fits on a single line.}
@@ -277,9 +276,9 @@ Creates a document like @scheme[d] but indented by @scheme[n] spaces from the cu
 @defthing[equals doc?]{@scheme[(char #\=)]}
 
 @section[#:tag "haskell"]{Haskell Compatibility Library}
-@declare-exporting[(planet dherman/pprint:4/haskell)]
+@declare-exporting[pprint/haskell]
 
-@schemeblock[(require (planet dherman/pprint:4/haskell))]
+@schemeblock[(require pprint/haskell)]
 
 For those who are more familiar with the names in the Haskell library,
 this library is provided as a compatibility mode. (This might be

@@ -1,6 +1,8 @@
 pprint.plt
 ----------
 
+[![Scribble](https://img.shields.io/badge/Docs-Scribble-blue.svg)](http://docs.racket-lang.org/pprint/index.html)
+
 This is a pretty printing library for Racket developed by Dave Herman.
 The original library is available on
 [PLaneT](http://planet.racket-lang.org/display.ss?package=pprint.plt&owner=dherman).

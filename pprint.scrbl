@@ -11,7 +11,7 @@
 
 @(define-cite ~cite citet generate-bibliography)
 
-@title[#:tag "top"]{@bold{PPrint}: A Universal Pretty-Printer}
+@title[#:tag "top"]{PPrint: A Universal Pretty-Printer}
 
 by Dave Herman (@tt{dherman at ccs dot neu dot edu})
 

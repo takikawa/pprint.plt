@@ -2,7 +2,9 @@
 
 @begin[(require scribble/example
                 scriblib/autobib)
-       (require (for-label racket/base pprint))]
+       (require (for-label racket/base pprint
+                           (only-in racket/contract
+                                    listof natural-number/c or/c any/c)))]
 
 @(define the-eval
    (let ([the-eval (make-base-eval)])
@@ -13,7 +15,9 @@
 
 @title[#:tag "top"]{PPrint: A Universal Pretty-Printer}
 
-by Dave Herman (@tt{dherman at ccs dot neu dot edu})
+@author[(author+email "Dave Herman" "dherman at ccs dot neu dot edu")]
+
+@defmodule[pprint]
 
 PPrint is a library for @deftech{pretty-printing}: generating textual representations
 formatted to fit as well as possible on a fixed-width device such as a text editor or
@@ -50,14 +54,13 @@ Things to notice about this example:
 ]
 
 @section[#:tag "doc"]{Abstract Documents}
-@declare-exporting[pprint]
 
 Formatting text in PPrint involves creating an "abstract document" or @deftech{doc},
 which encapsulates formatting information for the pretty printer. The library
 functions of PPrint build and combine docs, which can then be rendered for pretty
 printing (see @secref{rendering}).
 
-@defproc[(doc? (x any)) boolean?]{Determines whether a value is a member of the @tech{doc} datatype.}
+@defproc[(doc? (x any/c)) boolean?]{Determines whether a value is a member of the @tech{doc} datatype.}
 
 When using the @racket[markup] constructor, the @tech{doc} datatype may be thought of
 as a parameterized type @italic{doc a} for arbitrary markup of type @italic{a}. See the
@@ -68,7 +71,7 @@ documentation for @racket[markup] for details.
 
 @subsection[#:tag "rendering"]{Rendering Documents}
 
-@defproc[(pretty-print (d doc?) (out output-port? (current-output-port)) (width (or/c #f natural-number/c) (current-page-width))) any]{
+@defproc[(pretty-print (d doc?) (out output-port? (current-output-port)) (width (or/c #f natural-number/c) (current-page-width))) void?]{
 Pretty prints the doc @racket[d] to the output @racket[out] with a maximum page width of @racket[width].
 If @racket[width] is @racket[#f], the page width is considered infinite.}
 

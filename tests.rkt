@@ -1,6 +1,7 @@
 #lang racket/base
 
 (require rackunit
+         (only-in racket/list make-list)
          "main.rkt")
 
 (define-syntax pprint
@@ -74,3 +75,25 @@ for (int i = 0; i < 10; i++) {
 END
                 ))
 
+(test-case "overflow on subsequent line does not backtrack"
+  (check-equal? (pprint 10 (h-append
+                            (group (h-append (text "a") line (text "b")))
+                            line
+                            (text "aaaaaaaaaaa")))
+                #<<END
+a b
+aaaaaaaaaaa
+END
+                ))
+
+(test-case "no exponential backtracking"
+  (check-equal?
+   (begin
+     (pprint 10 (h-concat
+                 (append (make-list 100
+                                    (group (h-append (text "a")
+                                                     line
+                                                     (text "b"))))
+                         (list line (text "aaaaaaaaaaa")))))
+     'ok)
+   'ok))

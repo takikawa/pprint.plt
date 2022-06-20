@@ -265,6 +265,9 @@
 ;; layout : (or nat #f) * doc -> simple-doc
 (define (layout width doc)
   ;; best : nat * (listof (cons string doc)) * boolean -> simple-doc
+  ;; col is the current column position
+  ;; docs is a list of (pair of indentation string and document)
+  ;; alternate? is whether we are in the flattening mode
   (let best ([col 0] [docs (list (cons "" doc))] [alternate? #f])
     (match docs
       [(list) (make-SEMPTY)]
@@ -282,7 +285,7 @@
       [(list (cons is (struct MARKUP (f x))) docs* ...)
        (make-SPUSH f (best col (cons (cons is x) (cons #f docs*)) alternate?))]
       [(list (cons is (struct LINE (_))) docs* ...)
-       (make-SLINE is (best (string-length is) docs* alternate?))]
+       (make-SLINE is (best (string-length is) docs* #f))]
       [(list (cons is (struct GROUP (x))) docs* ...)
        (with-handlers* ([backtrack? (lambda (exn)
                                       (best col (cons (cons is x) docs*) alternate?))])

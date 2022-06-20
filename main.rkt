@@ -284,8 +284,8 @@
       [(list (cons is (struct LINE (_))) docs* ...)
        (make-SLINE is (best (string-length is) docs* alternate?))]
       [(list (cons is (struct GROUP (x))) docs* ...)
-       (with-handlers ([backtrack? (lambda (exn)
-                                     (best col (cons (cons is x) docs*) alternate?))])
+       (with-handlers* ([backtrack? (lambda (exn)
+                                      (best col (cons (cons is x) docs*) alternate?))])
          (best col (cons (cons is (flatten x)) docs*) #t))]
       [(list (cons is (struct TEXT (t))) docs* ...)
        (if (and width alternate? (too-big? t col width))
